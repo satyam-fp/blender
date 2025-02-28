@@ -544,6 +544,8 @@ class PREFERENCES_OT_addon_disable(Operator):
 
         module_name = self.module
         is_extension = addon_utils.check_extension(module_name)
+        if bpy.app.debug_python:
+            print("DEBUG: Satyam Comment: going to disable", module_name)
         addon_utils.disable(module_name, default_set=True, handle_error=err_cb)
 
         if err_str:

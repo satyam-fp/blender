@@ -571,12 +571,24 @@ def addons_panel_draw_items(
             icon='DOWNARROW_HLT' if show_expanded else 'RIGHTARROW',
             emboss=False,
         ).module = module_name
+        
+        # if bpy.app.debug_python:
+        #     print("DEBUG: Satyam Comment from bl_extension_ui.py: module_name", module_name)
+            
+        if module_name == "mixar_copilot":
+            row.label(icon='CHECKBOX_HLT', text="")
+        else:
+            row.operator(
+                "preferences.addon_disable" if is_enabled else "preferences.addon_enable",
+                icon='CHECKBOX_HLT' if is_enabled else 'CHECKBOX_DEHLT', text="",
+                emboss=False,
+            ).module = module_name
 
-        row.operator(
-            "preferences.addon_disable" if is_enabled else "preferences.addon_enable",
-            icon='CHECKBOX_HLT' if is_enabled else 'CHECKBOX_DEHLT', text="",
-            emboss=False,
-        ).module = module_name
+        # row.operator(
+        #     "preferences.addon_disable" if is_enabled else "preferences.addon_enable",
+        #     icon='CHECKBOX_HLT' if is_enabled else 'CHECKBOX_DEHLT', text="",
+        #     emboss=False,
+        # ).module = module_name
 
         sub = row.row()
         sub.active = is_enabled

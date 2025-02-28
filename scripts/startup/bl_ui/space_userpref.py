@@ -2557,11 +2557,24 @@ class USERPREF_PT_addons(AddOnPanel, Panel):
                 emboss=False,
             ).module = addon_module_name
 
-            row.operator(
-                "preferences.addon_disable" if is_enabled else "preferences.addon_enable",
-                icon='CHECKBOX_HLT' if is_enabled else 'CHECKBOX_DEHLT', text="",
-                emboss=False,
-            ).module = addon_module_name
+            # row.operator(
+            #     "preferences.addon_disable" if is_enabled else "preferences.addon_enable",
+            #     icon='CHECKBOX_HLT' if is_enabled else 'CHECKBOX_DEHLT', text="",
+            #     emboss=False,
+            # ).module = addon_module_name
+            
+            
+            # if bpy.app.debug_python:
+            #     print("DEBUG: Satyam Comment from space_userpref.py: addon_module_name", addon_module_name)
+            
+            if addon_module_name == "mixar_copilot":
+                row.label(icon='CHECKBOX_HLT', text="")
+            else:
+                row.operator(
+                    "preferences.addon_disable" if is_enabled else "preferences.addon_enable",
+                    icon='CHECKBOX_HLT' if is_enabled else 'CHECKBOX_DEHLT', text="",
+                    emboss=False,
+                ).module = addon_module_name
 
             sub = row.row()
             sub.active = is_enabled
