@@ -575,7 +575,7 @@ def addons_panel_draw_items(
         # if bpy.app.debug_python:
         #     print("DEBUG: Satyam Comment from bl_extension_ui.py: module_name", module_name)
             
-        if module_name == "mixar_copilot":
+        if is_enabled and module_name == "mixar_copilot":
             row.label(icon='CHECKBOX_HLT', text="")
         else:
             row.operator(

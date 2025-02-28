@@ -20,6 +20,9 @@ __all__ = (
 import bpy as _bpy
 _preferences = _bpy.context.preferences
 
+# if _bpy.app.debug_python:
+#     print("DEBUG: Satyam Comment from addon_utils.py: _preferences addons", _preferences.addons)
+
 error_encoding = False
 # (name, file, path)
 error_duplicates = []
@@ -593,6 +596,10 @@ def reset_all(*, reload_scripts=False):
     Sets the addon state based on the user preferences.
     """
     import sys
+    
+    # if _bpy.app.debug_python:
+    #     print("DEBUG: TADA Satyam Comment from addon_utils.py: reset_all")
+    #     print("this function is called when user clicks load factory settings")
 
     # Ensures stale `addons_fake_modules` isn't used.
     modules._is_first = True
@@ -609,12 +616,18 @@ def reset_all(*, reload_scripts=False):
         for mod_name, _mod_path in _bpy.path.module_names(path, package=pkg_id):
             is_enabled, is_loaded = check(mod_name)
 
+            # if _bpy.app.debug_python:
+            #     print(f"DEBUG: Satyam Comment from addon_utils.py: mod_name: {mod_name}, is_enabled: {is_enabled}, is_loaded: {is_loaded}")
+            
             # first check if reload is needed before changing state.
             if reload_scripts:
                 import importlib
                 mod = sys.modules.get(mod_name)
                 if mod:
                     importlib.reload(mod)
+                    
+            if mod_name == "mixar_copilot":
+                enable(mod_name, refresh_handled=True)
 
             if is_enabled == is_loaded:
                 pass
